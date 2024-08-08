@@ -1,5 +1,6 @@
 import { createContext, useReducer, useContext } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import CryptoJS from "crypto-js";
 
 const AuthContext = createContext();
 
@@ -29,22 +30,23 @@ function reducer(state, action) {
 
 function AuthProvider({ children }) {
     const [state, dispatch] = useReducer(reducer, {
-        token: localStorage.getItem("authToken"),
-        isAuthenticated: !!localStorage.getItem("authToken"),
+        token: decryptToken(localStorage.getItem("Token")),
+        isAuthenticated: !!localStorage.getItem("Token"),
     });
     const navigate = useNavigate();
     const location = useLocation();
 
     const actions = {
         login: (token) => {
-            dispatch({ type: ACTIONS.LOGIN, payload: token });
-            localStorage.setItem("authToken", token);
+            const encryptedToken = encryptToken(token);
+            dispatch({ type: ACTIONS.LOGIN, payload: encryptedToken });
+            localStorage.setItem("Token", encryptedToken);
             const origin = location.state?.from?.pathname || "/";
             navigate(origin);
         },
         logout: () => {
             dispatch({ type: ACTIONS.LOGOUT });
-            localStorage.removeItem("authToken");
+            localStorage.removeItem("Token");
         },
     };
 
@@ -61,6 +63,18 @@ function useAuth(type) {
         throw new Error("useAuth must be used within an AuthProvider");
     }
     return context[type];
+}
+
+function encryptToken(token) {
+    const secretKey = import.meta.env.SECRET_KEY || "default_secret_key";
+    return CryptoJS.AES.encrypt(token, secretKey).toString();
+}
+
+function decryptToken(encryptedToken) {
+    if (!encryptedToken) return null;
+    const secretKey = import.meta.env.SECRET_KEY || "default_secret_key";
+    const bytes = CryptoJS.AES.decrypt(encryptedToken, secretKey);
+    return bytes.toString(CryptoJS.enc.Utf8);
 }
 
 export { AuthContext, AuthProvider, useAuth };
