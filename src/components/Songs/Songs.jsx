@@ -18,7 +18,7 @@ function Songs() {
         let query = new URLSearchParams({
             page: page,
             page_size: 15,
-            ordering: `created_at`,
+            ordering: `-created_at`,
             ...filters,
         }).toString();
 
