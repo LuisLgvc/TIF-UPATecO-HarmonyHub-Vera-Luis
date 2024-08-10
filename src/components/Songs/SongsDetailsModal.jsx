@@ -1,5 +1,5 @@
 import React from 'react';
-import { Modal, Box, Typography, IconButton } from '@mui/material';
+import { Modal, Box, Typography, IconButton, Button } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 
 const style = {
@@ -9,14 +9,13 @@ const style = {
     transform: 'translate(-50%, -50%)',
     width: 400,
     bgcolor: 'background.paper',
-    border: '2px solid #000',
     boxShadow: 24,
     p: 4,
+    borderRadius: '10px',
+    border: '2px solid #000',
 };
 
-function SongsDetails({ open, handleClose, song }) {
-    if (!song) return null;
-
+function SongsDetails({ open, handleClose, song, handleOpenEdit, handleDelete, user__id }) {
     return (
         <Modal open={open} onClose={handleClose}>
             <Box sx={style}>
@@ -33,7 +32,7 @@ function SongsDetails({ open, handleClose, song }) {
                     <CloseIcon />
                 </IconButton>
                 <Typography variant="h6" component="h2">
-                    {song.title}
+                    {song.title || 'Sin título'}
                 </Typography>
                 <Typography sx={{ mt: 2 }}>
                     Artista: {song.artistName || 'Desconocido'}
@@ -49,6 +48,26 @@ function SongsDetails({ open, handleClose, song }) {
                         <source src={song.song_file} type="audio/mpeg" />
                         Tu navegador no soporta el elemento de audio.
                     </audio>
+                )}
+                {String(song.owner) === String(user__id) && (
+                    <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 2 }}>
+                        <Button
+                            variant="contained"
+                            color="primary"
+                            onClick={handleOpenEdit}
+                            sx={{ backgroundColor: '#1FDF64', '&:hover': { backgroundColor: '#189945' } }}
+                        >
+                            Editar
+                        </Button>
+                        <Button
+                            variant="contained"
+                            color="secondary"
+                            onClick={handleDelete}
+                            sx={{ backgroundColor: '#FF4C4C', '&:hover': { backgroundColor: '#D32F2F' } }}
+                        >
+                            Eliminar
+                        </Button>
+                    </Box>
                 )}
             </Box>
         </Modal>
