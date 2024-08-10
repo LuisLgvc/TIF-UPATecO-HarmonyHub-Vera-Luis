@@ -32,13 +32,43 @@ function Login() {
                     return response.json();
                 })
                 .then((responseData) => {
+                    console.log(responseData.token);
+                    login(responseData.token);
                     if (responseData.token) {
-                        login(responseData.token);
-                    } else {
-                        setIsError(true);
+                        fetch(
+                            `${
+                                import.meta.env.VITE_API_BASE_URL
+                            }users/profiles/profile_data/`,
+                            {
+                                method: "GET",
+                                headers: {
+                                    Authorization: `Token ${responseData.token}`,
+                                },
+                            }
+                        )
+                            .then((profileResponse) => {
+                                console.log(profileResponse);
+                                if (!profileResponse.ok) {
+                                    throw new Error(
+                                        "Error al obtener id de usuario"
+                                    );
+                                }
+                                return profileResponse.json();
+                            })
+                            .then((profileData) =>
+                                login(responseData.token, profileData.user__id)
+                            )
+                            .catch((error) => {
+                                console.error(
+                                    "Error al obtener id de usuario",
+                                    error
+                                );
+                                setIsError(true);
+                            });
                     }
                 })
-                .catch(() => {
+                .catch((error) => {
+                    console.error("Error error al iniciar sesión", error);
                     setIsError(true);
                 })
                 .finally(() => {
@@ -59,7 +89,7 @@ function Login() {
                 bgcolor: 'grey.200',
                 borderRadius: 2,
                 p: 4,
-                mt: '10vh', // Para centrar verticalmente
+                mt: '10vh',
             }}
         >
             <Box
@@ -100,14 +130,7 @@ function Login() {
                     type="submit"
                     variant="contained"
                     color="primary"
-                    sx={{
-                        mt: 2,
-                        borderRadius: 2,
-                        bgcolor: 'purple',
-                        '&:hover': {
-                            bgcolor: 'darkpurple',
-                        },
-                    }}
+                    sx={{ backgroundColor: '#1FDF64', '&:hover': { backgroundColor: '#189945' } }}
                     disabled={isLoading}
                 >
                     {isLoading ? 'Cargando...' : 'Iniciar Sesión'}
