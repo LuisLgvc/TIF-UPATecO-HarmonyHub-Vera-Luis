@@ -14,13 +14,15 @@ function reducer(state, action) {
         case ACTIONS.LOGIN:
             return {
                 ...state,
-                token: action.payload,
+                user__id: action.payload.user__id,
+                token: action.payload.token,
                 isAuthenticated: true,
             };
         case ACTIONS.LOGOUT:
             return {
                 ...state,
                 token: null,
+                user__id: null,
                 isAuthenticated: false,
             };
         default:
@@ -30,23 +32,31 @@ function reducer(state, action) {
 
 function AuthProvider({ children }) {
     const [state, dispatch] = useReducer(reducer, {
-        token: decryptToken(localStorage.getItem("Token")),
-        isAuthenticated: !!localStorage.getItem("Token"),
+        user__id: localStorage.getItem("user__id"),
+        token: decrypt(localStorage.getItem("Token")),
+        isAuthenticated: localStorage.getItem("Token") ? true : false,
     });
     const navigate = useNavigate();
-    const location = useLocation();
 
     const actions = {
-        login: (token) => {
-            const encryptedToken = encryptToken(token);
-            dispatch({ type: ACTIONS.LOGIN, payload: encryptedToken });
+        login: (token, user__id) => {
+            const encryptedToken = encrypt(token);
+            
+            dispatch({
+                type: ACTIONS.LOGIN,
+                payload: { token, user__id },
+            });
+
             localStorage.setItem("Token", encryptedToken);
-            const origin = location.state?.from?.pathname || "/";
-            navigate(origin);
+            localStorage.setItem("user__id", user__id);
+            
+            navigate("/");
         },
         logout: () => {
             dispatch({ type: ACTIONS.LOGOUT });
             localStorage.removeItem("Token");
+            localStorage.removeItem("user__id");
+            navigate("/");
         },
     };
 
@@ -65,15 +75,15 @@ function useAuth(type) {
     return context[type];
 }
 
-function encryptToken(token) {
+function encrypt(param) {
     const secretKey = import.meta.env.SECRET_KEY || "default_secret_key";
-    return CryptoJS.AES.encrypt(token, secretKey).toString();
+    return CryptoJS.AES.encrypt(param, secretKey).toString();
 }
 
-function decryptToken(encryptedToken) {
-    if (!encryptedToken) return null;
+function decrypt(param) {
+    if (!param) return null;
     const secretKey = import.meta.env.SECRET_KEY || "default_secret_key";
-    const bytes = CryptoJS.AES.decrypt(encryptedToken, secretKey);
+    const bytes = CryptoJS.AES.decrypt(param, secretKey);
     return bytes.toString(CryptoJS.enc.Utf8);
 }
 
