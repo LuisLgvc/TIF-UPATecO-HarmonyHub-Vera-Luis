@@ -77,15 +77,6 @@ function Profile() {
                             <strong>Biografía:</strong> {userData.bio || "No disponible"}
                         </Typography>
                     </CardContent>
-                    <Button
-                        variant="contained"
-                        color="primary"
-                        fullWidth
-                        sx={{ backgroundColor: '#1FDF64', '&:hover': { backgroundColor: '#189945' } }}
-                        onClick={logout}
-                    >
-                        Cerrar Sesión
-                    </Button>
                 </Card>
             ) : (
                 <Typography>No se encontraron datos del usuario.</Typography>
