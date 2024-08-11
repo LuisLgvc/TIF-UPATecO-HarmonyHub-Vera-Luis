@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import Login from "../components/Authentication/Login";
 import Songs from "../components/Songs/Songs";
+import MySongs from "../components/Songs/Mysongs";
 import Albums from "../components/Albums/Albums";
 import Artists from "../components/Artists/Artists";
 import Profile from "../components/Profile";
@@ -20,6 +21,10 @@ const Router = createBrowserRouter([
             {
                 path: "login",
                 element: <Login />,
+            },
+            {
+                path: "mysongs",
+                element: <MySongs />,
             },
             {
                 path: "/albums",
