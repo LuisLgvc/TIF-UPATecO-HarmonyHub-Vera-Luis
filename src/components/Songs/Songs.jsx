@@ -4,7 +4,7 @@ import useFetchSongs from '../../hooks/UseFetchSongs';
 import useUpdateSong from '../../hooks/UseUpdateSong';
 import useAddSong from '../../hooks/UseAddSong';
 import useDeleteSong from '../../hooks/UseDeleteSong';
-import SongCards from './SongsCards';
+import SongsCards from './SongsCards';
 import SongsDetails from './SongsDetailsModal';
 import EditSongModal from './EditSongModal';
 import AddSongModal from './AddSongModal';
@@ -95,7 +95,7 @@ function SongList() {
             <Grid container spacing={2}>
                 {songs.map((song) => (
                     <Grid item xs={2.4} sm={2.4} md={2.4} lg={2.4} key={song.id}>
-                        <SongCard song={song} onClick={() => handleSongClick(song)} />
+                        <SongsCards song={song} onClick={() => handleSongClick(song)} />
                     </Grid>
                 ))}
             </Grid>
@@ -133,7 +133,7 @@ function SongList() {
             )}
             {selectedSong && (
                 <>
-                    <SongModal
+                    <SongsDetails
                         open={isModalOpen}
                         handleClose={handleCloseModal}
                         song={selectedSong}
