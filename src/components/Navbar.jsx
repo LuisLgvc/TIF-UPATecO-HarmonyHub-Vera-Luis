@@ -3,6 +3,7 @@ import { useAuth } from '../contexts/AuthContext';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { AppBar, Toolbar, Box, Button, Tabs, Tab, Menu, MenuItem } from '@mui/material';
 
+// Componente que muestra la barra de navegación de la aplicación con las diferentes pestañas disponibles
 function Navbar() {
     const { isAuthenticated } = useAuth("state");
     const navigate = useNavigate();

@@ -3,6 +3,7 @@ import { Container, Typography, Button, Box } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import logo from '../assets/spotixImg.png';
 
+// Componente que muestra una pagina cuando se produce el error 404(Not Found)
 function NotFound() {
     const navigate = useNavigate();
 

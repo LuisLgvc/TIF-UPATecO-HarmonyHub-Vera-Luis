@@ -4,6 +4,7 @@ import useFetchArtists from '../../hooks/useFetchArtists';
 import ArtistCard from './ArtistCard';
 import ArtistModal from './ArtistModal';
 
+// Componente que muestra los artistas obtenidos a traves del hook useFetchArtists
 function Artists() {
     const [page, setPage] = useState(1);
     const [selectedArtist, setSelectedArtist] = useState(null);

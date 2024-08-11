@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 
+// Hook que obtiene todos los albumes de la API y los ordena por fecha de creación
 const useFetchAlbums = (page, filters) => {
     const { token } = useAuth("state");
     const [albums, setAlbums] = useState([]);

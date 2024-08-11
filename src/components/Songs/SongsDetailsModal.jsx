@@ -16,6 +16,9 @@ const style = {
     border: '2px solid #000',
 };
 
+
+// Modal que contiene los detalles de la canción
+// Cuenta con botones para editar y para eliminar la canción que se activan solo si el usuario autenticado es el dueño de la canción
 function SongsDetails({ open, handleClose, song, handleOpenEdit, handleDelete, user__id }) {
     return (
         <Modal open={open} onClose={handleClose}>

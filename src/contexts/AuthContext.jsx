@@ -1,5 +1,5 @@
 import { createContext, useReducer, useContext } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import CryptoJS from "crypto-js";
 
 const AuthContext = createContext();

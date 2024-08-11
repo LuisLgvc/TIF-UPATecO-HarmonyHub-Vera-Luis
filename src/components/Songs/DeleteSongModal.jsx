@@ -14,6 +14,7 @@ const style = {
     border: '2px solid #000',
 };
 
+// Modal para confirmar la eliminación de una canción
 function DeleteSongModal({ open, handleClose, handleConfirm }) {
     return (
         <Modal open={open} onClose={handleClose}>

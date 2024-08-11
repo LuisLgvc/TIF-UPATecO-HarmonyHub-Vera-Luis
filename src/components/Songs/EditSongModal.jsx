@@ -29,7 +29,8 @@ const style = {
     border: '2px solid #000',
 };
 
-function EditSongModal({ open, handleClose, song, token, onSave }) {
+// Modal para editar una canción
+function EditSongModal({ open, handleClose, song, onSave }) {
     const [formData, setFormData] = useState({
         id: song.id,
         title: song.title,

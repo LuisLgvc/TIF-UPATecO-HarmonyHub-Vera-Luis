@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 
+// Hook que obtiene todas las canciones de la API y las ordena por fecha de creación
 const useFetchSongs = (page, filters) => {
     const { token } = useAuth("state");
     const [songs, setSongs] = useState([]);

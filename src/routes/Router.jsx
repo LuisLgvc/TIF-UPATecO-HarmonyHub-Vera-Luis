@@ -8,6 +8,7 @@ import ProtectedRoute from "./ProtectedRoute";
 import NotFound from "../components/NotFound";
 import Layout from "./Layout";
 
+// Router principal de la aplicación donde se encuentran las diferentes rutas que contiene la app
 const Router = createBrowserRouter([
     {
         element: <Layout />,
@@ -31,14 +32,14 @@ const Router = createBrowserRouter([
             {
                 path: "profile",
                 element: (
-                    <ProtectedRoute>
+                    <ProtectedRoute> 
                         <Profile />
-                    </ProtectedRoute>),
+                    </ProtectedRoute>), // Solo se asigna la ruta protegida al perfil
             }
         ],
     },
     {
-        path: "*",
+        path: "*", // Comodin que abarca todas las rutas no declaradas
         element: <NotFound />,
     },
 ]);
