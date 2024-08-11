@@ -22,6 +22,9 @@ function Navbar() {
             case '/albums':
                 setValue(1);
                 break;
+            case '/artists':
+                setValue(2);
+                break;
             case '/profile':
                 setValue(null); // Ninguna pestaña seleccionada cuando está en perfil
                 break;
@@ -38,6 +41,9 @@ function Navbar() {
                 break;
             case 1:
                 navigate("/albums");
+                break;
+            case 2:
+                navigate("/artists");
                 break;
             default:
                 break;
