@@ -23,8 +23,8 @@ function AddSongModal({ open, handleClose, onSave, isAuthenticated }) {
     const [formData, setFormData] = useState({
         title: '',
         year: '',
-        album: '',
     });
+    const [imageFile, setImageFile] = useState(null);
     const [songFile, setSongFile] = useState(null);
 
     const handleInputChange = (event) => {
@@ -33,7 +33,12 @@ function AddSongModal({ open, handleClose, onSave, isAuthenticated }) {
     };
 
     const handleFileChange = (event) => {
-        setSongFile(event.target.files[0]);
+        const file = event.target.files[0];
+        if (event.target.accept.includes('image/*')) {
+            setImageFile(file);
+        } else if (event.target.accept.includes('audio/*')) {
+            setSongFile(file);
+        }
     };
 
     const handleSubmit = (event) => {
@@ -41,7 +46,9 @@ function AddSongModal({ open, handleClose, onSave, isAuthenticated }) {
         const newForm = new FormData();
         newForm.append('title', formData.title);
         newForm.append('year', formData.year);
-        newForm.append('album', formData.album);
+        if (imageFile) {
+            newForm.append('cover', imageFile);
+        }
         if (songFile) {
             newForm.append('song_file', songFile);
         }
@@ -62,6 +69,25 @@ function AddSongModal({ open, handleClose, onSave, isAuthenticated }) {
                     Agregar Canción
                 </Typography>
                 <form onSubmit={handleSubmit}>
+                    <Button
+                        variant="contained"
+                        component="label"
+                        fullWidth
+                        sx={{ mt: 2 }}
+                    >
+                        Subir imagen
+                        <input
+                            type="file"
+                            hidden
+                            accept="image/*"
+                            onChange={handleFileChange}
+                        />
+                    </Button>
+                    {imageFile && (
+                        <Typography variant="body2" sx={{ mt: 2 }}>
+                            Imagen seleccionada: {imageFile.name}
+                        </Typography>
+                    )}
                     <TextField
                         label="Título"
                         required
@@ -79,21 +105,13 @@ function AddSongModal({ open, handleClose, onSave, isAuthenticated }) {
                         fullWidth
                         margin="normal"
                     />
-                    <TextField
-                        label="Álbum"
-                        name="album"
-                        value={formData.album}
-                        onChange={handleInputChange}
-                        fullWidth
-                        margin="normal"
-                    />
                     <Button
                         variant="contained"
                         component="label"
                         fullWidth
                         sx={{ mt: 2 }}
                     >
-                        Subir Archivo de Canción
+                        Subir canción
                         <input
                             type="file"
                             hidden
