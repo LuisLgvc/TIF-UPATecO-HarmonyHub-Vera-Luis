@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Modal, Box, Typography, IconButton, TextField, Button } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 
@@ -27,6 +27,15 @@ function AddSongModal({ open, handleClose, onSave, isAuthenticated }) {
     });
     const [imageFile, setImageFile] = useState(null);
     const [songFile, setSongFile] = useState(null);
+
+    // Este efecto se realiza cuando el modal se abre
+    useEffect(() => {
+        if (open) {
+            setFormData({ title: '', year: '' });
+            setImageFile(null);
+            setSongFile(null);
+        }
+    }, [open]);
 
     const handleInputChange = (event) => {
         const { name, value } = event.target;
