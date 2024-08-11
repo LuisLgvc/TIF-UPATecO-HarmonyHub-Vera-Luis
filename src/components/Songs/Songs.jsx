@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Grid, Button } from '@mui/material';
-import useFetchSongs from '../../hooks/UseFetchSongs';
-import useUpdateSong from '../../hooks/UseUpdateSong';
-import useAddSong from '../../hooks/UseAddSong';
-import useDeleteSong from '../../hooks/UseDeleteSong';
+import useFetchSongs from '../../hooks/useFetchSongs';
+import useUpdateSong from '../../hooks/useUpdateSong';
+import useAddSong from '../../hooks/useAddSong';
+import useDeleteSong from '../../hooks/useDeleteSong';
 import SongsCards from './SongsCards';
 import SongsDetails from './SongsDetailsModal';
 import EditSongModal from './EditSongModal';

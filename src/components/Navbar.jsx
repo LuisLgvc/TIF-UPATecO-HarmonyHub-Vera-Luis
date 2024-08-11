@@ -19,7 +19,7 @@ function Navbar() {
             case '/':
                 setValue(0);
                 break;
-            case '/artists':
+            case '/albums':
                 setValue(1);
                 break;
             case '/profile':
@@ -37,7 +37,7 @@ function Navbar() {
                 navigate("/");
                 break;
             case 1:
-                navigate("/artists");
+                navigate("/albums");
                 break;
             default:
                 break;
@@ -57,10 +57,10 @@ function Navbar() {
             <Toolbar>
                 <Tabs value={value} onChange={handleChange} textColor="inherit" indicatorColor="primary">
                     <Tab label="Canciones" sx={{ color: '#FFFFFF' }} />
+                    <Tab label="Albums" sx={{ color: '#FFFFFF' }} />
                     <Tab label="Artistas" sx={{ color: '#FFFFFF' }} />
-                    <Tab label="Albums" sx={{ color: '#FFFFFF' }} disable />
-                    <Tab label="Generos" sx={{ color: '#FFFFFF' }} disable />
-                    <Tab label="Playlists" sx={{ color: '#FFFFFF' }} disable />
+                    <Tab label="Generos" sx={{ color: '#FFFFFF' }} disabled />
+                    <Tab label="Playlists" sx={{ color: '#FFFFFF' }} disabled />
                 </Tabs>
                 <Box sx={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', marginLeft: 'auto' }}>
                     {isAuthenticated ? (
