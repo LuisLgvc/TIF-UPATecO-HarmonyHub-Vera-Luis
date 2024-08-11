@@ -135,6 +135,7 @@ function EditSongModal({ open, handleClose, song, onSave }) {
                 />
                 <TextField
                     margin="normal"
+                    required
                     fullWidth
                     id="year"
                     label="Año"

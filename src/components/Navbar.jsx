@@ -20,11 +20,14 @@ function Navbar() {
             case '/':
                 setValue(0);
                 break;
-            case '/albums':
+            case '/mysongs':
                 setValue(1);
                 break;
-            case '/artists':
+            case '/albums':
                 setValue(2);
+                break;
+            case '/artists':
+                setValue(3);
                 break;
             case '/profile':
                 setValue(null); // Ninguna pestaña seleccionada cuando está en perfil
@@ -41,9 +44,12 @@ function Navbar() {
                 navigate("/");
                 break;
             case 1:
-                navigate("/albums");
+                navigate("/mysongs");
                 break;
             case 2:
+                navigate("/albums");
+                break;
+            case 3:
                 navigate("/artists");
                 break;
             default:
@@ -64,6 +70,11 @@ function Navbar() {
             <Toolbar>
                 <Tabs value={value} onChange={handleChange} textColor="inherit" indicatorColor="primary">
                     <Tab label="Canciones" sx={{ color: '#FFFFFF' }} />
+                    {isAuthenticated ? (
+                        <Tab label="Mis Canciones" sx={{ color: '#FFFFFF' }} />
+                    ) : (
+                        <Tab label="Mis Canciones" sx={{ color: '#FFFFFF' }} disabled />
+                    )}
                     <Tab label="Albums" sx={{ color: '#FFFFFF' }} />
                     <Tab label="Artistas" sx={{ color: '#FFFFFF' }} />
                     <Tab label="Generos" sx={{ color: '#FFFFFF' }} disabled />
