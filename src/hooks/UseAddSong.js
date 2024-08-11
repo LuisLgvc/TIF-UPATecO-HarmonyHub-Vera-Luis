@@ -1,5 +1,6 @@
 import { useState } from 'react';
 
+// Hook personalizado a cargo de agregar una nueva cancion
 const useAddSong = (token, setSongs) => {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);

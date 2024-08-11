@@ -1,6 +1,7 @@
 import React from 'react';
 import { Card, CardContent, Typography, CardMedia } from '@mui/material';
 
+// Carta que muestra la informacion basica de una canción
 function SongsCards({ song, onClick }) {
     return (
         <Card 

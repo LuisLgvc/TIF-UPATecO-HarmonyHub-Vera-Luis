@@ -1,5 +1,6 @@
 import { useState } from 'react';
 
+// Hook personalizado a cargo de borrar una cancion existente
 const useDeleteSong = (token, setSongs) => {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);

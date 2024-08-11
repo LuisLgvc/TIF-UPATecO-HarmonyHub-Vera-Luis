@@ -11,6 +11,9 @@ import AddSongModal from './AddSongModal';
 import DeleteSongModal from './DeleteSongModal';
 import { useAuth } from '../../contexts/AuthContext';
 
+// Componente que muestra las canciones obtenidas a traves del hook useFetchSongs 
+// y permite agregar, editar y eliminar canciones por medio de los hooks correspondientes
+// Ademas cuenta con la comporobacion si el usuario esta autenticado para mostrar el boton de agregar cancion
 function SongList() {
     const { token, user__id, isAuthenticated } = useAuth("state");
     const [page, setPage] = useState(1);

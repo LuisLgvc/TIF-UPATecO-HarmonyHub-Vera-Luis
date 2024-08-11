@@ -3,6 +3,7 @@ import { useAuth } from "../../contexts/AuthContext";
 import { Box, Button, Container, TextField, Typography } from "@mui/material";
 import logo from "../../assets/spotixImg.png";
 
+// Funcion que inicia sesion y anidado tiene una query para obtener el id del usuario
 function Login() {
     const usernameRef = useRef(null);
     const passwordRef = useRef(null);
@@ -32,7 +33,6 @@ function Login() {
                     return response.json();
                 })
                 .then((responseData) => {
-                    console.log(responseData.token);
                     login(responseData.token);
                     if (responseData.token) {
                         fetch(
@@ -47,7 +47,6 @@ function Login() {
                             }
                         )
                             .then((profileResponse) => {
-                                console.log(profileResponse);
                                 if (!profileResponse.ok) {
                                     throw new Error(
                                         "Error al obtener id de usuario"

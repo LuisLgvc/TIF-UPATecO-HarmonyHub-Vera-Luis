@@ -16,6 +16,7 @@ const style = {
     border: '2px solid #000',
 };
 
+// Modal que contiene los detalles del artista
 function ArtistModal({ open, handleClose, artist, handleOpenEdit, handleDelete, user__id }) {
     return (
         <Modal open={open} onClose={handleClose}>

@@ -2,6 +2,7 @@ import React from 'react';
 import { Card, CardContent, Typography, CardMedia } from '@mui/material';
 import logo from '../../assets/notFoundImg.png';
 
+// Carta correspondiende a cada album obtenido
 function AlbumCard({ album, onClick }) {
     return (
         <Card

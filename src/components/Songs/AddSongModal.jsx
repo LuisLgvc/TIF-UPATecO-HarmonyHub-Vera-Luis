@@ -15,6 +15,7 @@ const style = {
     border: '2px solid #000',
 };
 
+// Modal para agregar una canción con la comprobacion del usuario autenticado
 function AddSongModal({ open, handleClose, onSave, isAuthenticated }) {
     if (!isAuthenticated) {
         return null;

@@ -2,6 +2,7 @@ import React from 'react';
 import { Card, CardContent, Typography, CardMedia } from '@mui/material';
 import logo from '../../assets/notFoundImg.png';
 
+// Carta que muestra la informacion de un artista
 function ArtistCard({ artist, onClick }) {
     return (
         <Card

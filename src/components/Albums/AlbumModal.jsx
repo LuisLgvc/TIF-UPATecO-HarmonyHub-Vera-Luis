@@ -16,7 +16,8 @@ const style = {
     border: '2px solid #000',
 };
 
-function AlbumModal({ open, handleClose, album, handleOpenEdit, handleDelete, user__id }) {
+// Modal que contiene los detalles del album
+function AlbumModal({ open, handleClose, album}) {
     return (
         <Modal open={open} onClose={handleClose}>
             <Box sx={style}>
@@ -40,10 +41,7 @@ function AlbumModal({ open, handleClose, album, handleOpenEdit, handleDelete, us
                 </Typography>
                 <Typography sx={{ mt: 2 }}>
                     Año: {album.releaseYear || 'Desconocido'}
-                </Typography>
-                {/* <Typography sx={{ mt: 2 }}>
-                    Canciones: {album.songs.length || 0}
-                </Typography> */}                
+                </Typography>             
             </Box>
         </Modal>
     );

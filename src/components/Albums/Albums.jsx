@@ -3,8 +3,8 @@ import { Grid, Button } from '@mui/material';
 import useFetchAlbums from '../../hooks/UseFetchAlbums';
 import AlbumCard from './AlbumCard';
 import AlbumModal from './AlbumModal';
-import { useAuth } from '../../contexts/AuthContext';
 
+// Componente que muestra los albumes obtenidos a traves del hook useFetchAlbums
 function Albums() {
     const [page, setPage] = useState(1);
     const [filters, setFilters] = useState({});
