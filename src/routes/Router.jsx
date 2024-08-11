@@ -3,7 +3,8 @@ import Home from "../components/Home";
 import Login from "../components/Authentication/Login";
 import Songs from "../components/Songs/Songs";
 import Profile from "../components/Profile";
-import ProtectedRoute from "./ProtectedRoute";	
+import ProtectedRoute from "./ProtectedRoute";
+import NotFound from "../components/NotFound";
 import Layout from "./Layout";
 
 const Router = createBrowserRouter([
@@ -29,7 +30,7 @@ const Router = createBrowserRouter([
     },
     {
         path: "*",
-        element: <h1>Not Found</h1>,
+        element: <NotFound />,
     },
 ]);
 

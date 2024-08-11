@@ -1,42 +1,11 @@
-import { useState, useEffect } from "react";
-import { useAuth } from "../contexts/AuthContext";
 import { Container, Typography, Box, Button, Card, CardContent, CardMedia } from "@mui/material";
 import notFoundImg from "../assets/notFoundImg.png";
+import useUserProfile from "../hooks/useUserProfile"; // Importa el hook personalizado
 
 function Profile() {
-    const [userData, setUserData] = useState(null);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
+    const { userData, isLoading, error } = useUserProfile(); // Utiliza el hook personalizado
 
-    const { token } = useAuth("state");
-
-    const { logout } = useAuth("actions");
-
-    useEffect(() => {
-        fetch(`${import.meta.env.VITE_API_BASE_URL}users/profiles/profile_data/`, {
-            method: "GET",
-            headers: {
-                Authorization: `Token ${token}`,
-            },
-        })
-            .then((response) => {
-                if (!response.ok) {
-                    throw new Error("Failed to fetch user data");
-                }
-                return response.json();
-            })
-            .then((data) => {
-                setUserData(data);
-            })
-            .catch((error) => {
-                setError(error.message);
-            })
-            .finally(() => {
-                setLoading(false);
-            });
-    }, [token]);
-
-    if (loading) return <Typography>Cargando perfil...</Typography>;
+    if (isLoading) return <Typography>Cargando perfil...</Typography>;
     if (error) return <Typography>Error: {error}</Typography>;
 
     return (
