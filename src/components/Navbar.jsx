@@ -58,6 +58,9 @@ function Navbar() {
                 <Tabs value={value} onChange={handleChange} textColor="inherit" indicatorColor="primary">
                     <Tab label="Canciones" sx={{ color: '#FFFFFF' }} />
                     <Tab label="Artistas" sx={{ color: '#FFFFFF' }} />
+                    <Tab label="Albums" sx={{ color: '#FFFFFF' }} disable />
+                    <Tab label="Generos" sx={{ color: '#FFFFFF' }} disable />
+                    <Tab label="Playlists" sx={{ color: '#FFFFFF' }} disable />
                 </Tabs>
                 <Box sx={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', marginLeft: 'auto' }}>
                     {isAuthenticated ? (
